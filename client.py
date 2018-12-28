@@ -18,7 +18,7 @@ class Client:
         except  :
             raise ClientError("Error")
         if data.decode() == "ok\n\n":
-                pass
+            pass
         else:
             raise ClientError("Error")
             
