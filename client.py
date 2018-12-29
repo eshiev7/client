@@ -11,7 +11,11 @@ class Client:
         except:
             raise ClientError("Error")
             
-    def put(self, key, value, timestamp = int(time.time())):
+    def put(self, key, value, timestamp=None):
+        if timestamp == None:
+            timestamp = int(time.time())
+        elif timestamp == "":
+            timestamp = int(time.time())
         try:
             self.sock.sendall(("put " + str(key) + " " + str(value) + " " + str(timestamp) + "\n").encode())
             data = self.sock.recv(1024).decode()
