@@ -14,10 +14,10 @@ class Client:
     def put(self, key, value, timestamp = int(time.time())):
         try:
             self.sock.sendall(("put " + str(key) + " " + str(value) + " " + str(timestamp) + "\n").encode())
-            data = self.sock.recv(1024)
+            data = self.sock.recv(1024).decode()
         except  :
             raise ClientError("Error")
-        if data.decode() == "ok\n\n":
+        if data == "ok\n\n":
             pass
         else:
             raise ClientError("Error")
