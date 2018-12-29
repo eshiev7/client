@@ -18,7 +18,7 @@ class Client:
             timestamp = int(time.time())
         try:
             self.sock.sendall(("put " + str(key) + " " + str(value) + " " + str(timestamp) + "\n").encode())
-            data = self.sock.recv(1024).decode()
+            data = self.sock.recv(4096).decode()
         except  :
             raise ClientError("Error")
         if data == "ok\n\n":
@@ -30,7 +30,7 @@ class Client:
         dictionary = dict()
         try:
             self.sock.sendall(("get " + str(key) + "\n").encode())
-            metrics = self.sock.recv(1024).decode()
+            metrics = self.sock.recv(4096).decode()
         except:
             raise ClientError("Error")
         if metrics == "error\nwrong command\n\n":
